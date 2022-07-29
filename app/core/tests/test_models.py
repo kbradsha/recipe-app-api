@@ -6,8 +6,9 @@ from django.contrib.auth import get_user_model
 
 
 class ModelTests(TestCase):
-
+    """ Django class to encapsulate the model tests"""
     def test_create_user_with_email_successful(self):
+        """Django method to create users as a test"""
         email = 'test@example.com'
         password = 'testpass123'
         user = get_user_model().objects.create_user(
@@ -19,6 +20,7 @@ class ModelTests(TestCase):
         self.assertTrue(user.check_password(password))
 
     def test_new_user_email_norm(self):
+        """Django method to normalize user email addresses"""
         sample_emails = [
                 ['test1@EXAMPLE.com', 'test1@example.com'],
                 ['Test2@Example.com', 'Test2@example.com'],
@@ -29,7 +31,8 @@ class ModelTests(TestCase):
             user =  get_user_model().objects.create_user(email, 'sample123')
             self.assertEqual(user.email, expected)
 
-    def test_new_user_without_raises_error(self):
+    def test_new_user_without_raises_error(self): 
+        """ Django method to test the creation of a new user with error checking"""
         with self.assertRaises(ValueError):
             get_user_model().objects.create_user('', 'test123')
 

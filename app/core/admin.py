@@ -7,6 +7,7 @@ from django.utils.translation import gettext_lazy as _
 from core import models
 
 class UserAdmin(BaseUserAdmin):
+    """ Base User Administration Django wrapper class """
     ordering = ['id']
     list_display = ['email', 'name']
     fieldsets = (
