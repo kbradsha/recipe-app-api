@@ -34,7 +34,7 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    """ User class for encapsulating user fields in the 
+    """ User class for encapsulating user fields in the
     database"""
     email = models.EmailField(max_length=255, unique=True)
     name = models.CharField(max_length=255)

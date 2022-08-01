@@ -20,7 +20,7 @@ class CommandTests(SimpleTestCase):
 
     @patch('time.sleep')
     def test_wait_for_db_delay(self, patched_sleep, patched_check):
-        """ Django test method to sleep for the database to come online""" 
+        """ Django test method to sleep for the database to come online"""
         patched_check.side_effect = [Psycopg2Error] * 2 + \
             [OperationalError] * 3 + [True]
         call_command('wait_for_db')
