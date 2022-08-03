@@ -6,6 +6,7 @@ from django.test import TestCase
 from django.contrib.auth import get_user_model
 from core import models
 
+
 class ModelTests(TestCase):
     """ Django class to encapsulate the model tests"""
     def test_create_user_with_email_successful(self):
