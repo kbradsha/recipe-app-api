@@ -13,8 +13,8 @@ from core.models import Ingredient
 from recipe.serializers import IngredientSerializer
 
 
-
 INGREDIENTS_URL = reverse('recipe:ingredient-list')
+
 
 def detail_url(ingredient_id):
     """Create and return an ingedient detail URL."""
@@ -52,7 +52,7 @@ class PrivateIngredientsApiTests(TestCase):
         Ingredient.objects.create(user=self.user, name='Kale')
         Ingredient.objects.create(user=self.user, name='Vanilla')
 
-        res=self.client.get(INGREDIENTS_URL)
+        res = self.client.get(INGREDIENTS_URL)
 
         ingredients = Ingredient.objects.all().order_by('-name')
         serializer = IngredientSerializer(ingredients, many=True)
@@ -71,7 +71,7 @@ class PrivateIngredientsApiTests(TestCase):
         self.assertEqual(len(res.data), 1)
         self.assertEqual(res.data[0]['name'], ingredient.name)
         self.assertEqual(res.data[0]['id'], ingredient.id)
- 
+
     def test_update_ingredient(self):
         """Test updating an ingredient"""
         ingredient = Ingredient.objects.create(user=self.user, name='Cilantro')
@@ -94,4 +94,3 @@ class PrivateIngredientsApiTests(TestCase):
         self.assertEqual(res.status_code, status.HTTP_204_NO_CONTENT)
         ingredients = Ingredient.objects.filter(user=self.user)
         self.assertFalse(ingredients.exists())
-

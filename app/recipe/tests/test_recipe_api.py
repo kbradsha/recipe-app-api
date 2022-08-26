@@ -28,7 +28,7 @@ RECIPES_URL = reverse('recipe:recipe-list')
 def detail_url(recipe_id):
     """Create and return a recipe detail URL"""
     return reverse('recipe:recipe-detail', args=[recipe_id])
-    
+
 
 def create_recipe(user, **params):
     """Create and return a sample recipe"""
@@ -102,7 +102,7 @@ class PrivateRecipeApiTests(TestCase):
         res = self.client.get(url)
         serializer = RecipeDetailSerializer(recipe)
         self.assertEqual(res.data, serializer.data)
- 
+
     def test_create_recipe(self):
         """Test creating a recipe"""
         payload = {
@@ -326,4 +326,3 @@ class PrivateRecipeApiTests(TestCase):
                 user=self.user,
             ).exists()
             self.assertTrue(exists)
-

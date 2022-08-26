@@ -57,7 +57,7 @@ class RecipeDetailSerializer(RecipeSerializer):
                 **tag,
             )
             recipe.tags.add(tag_obj)
-            
+
     def _get_or_create_ingredients(self, ingredients, recipe):
         """Handle getting or creating ingredients as needed"""
         auth_user = self.context['request'].user
@@ -90,4 +90,3 @@ class RecipeDetailSerializer(RecipeSerializer):
 
         instance.save()
         return instance
-
