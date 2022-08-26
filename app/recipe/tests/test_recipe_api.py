@@ -106,7 +106,7 @@ class PrivateRecipeApiTests(TestCase):
     def test_create_recipe(self):
         """Test creating a recipe"""
         payload = {
-            'title': "Sample recipe",
+            'title': 'Sample recipe',
             'time_minutes': 30,
             'price': Decimal('5.99'),
         }
