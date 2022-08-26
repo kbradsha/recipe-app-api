@@ -110,7 +110,7 @@ class PrivateRecipeApiTests(TestCase):
             'time_minutes': 30,
             'price': Decimal('5.99'),
         }
-        res =  self.client.post(RECIPES_URL, payload)
+        res = self.client.post(RECIPES_URL, payload)
         self.assertEqual(res.status_code, status.HTTP_201_CREATED)
         recipe = Recipe.objects.get(id=res.data['id'])
         for k, v in payload.items():
@@ -128,7 +128,7 @@ class PrivateRecipeApiTests(TestCase):
 
         payload = {'title': 'New recipe title'}
         url = detail_url(recipe.id)
-        res  = self.client.patch(url, payload)
+        res = self.client.patch(url, payload)
 
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         recipe.refresh_from_db()
@@ -154,7 +154,7 @@ class PrivateRecipeApiTests(TestCase):
         }
         url = detail_url(recipe.id)
         res = self.client.put(url, payload)
-        
+
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         recipe.refresh_from_db()
         for k, v in payload.items():
@@ -183,7 +183,7 @@ class PrivateRecipeApiTests(TestCase):
         self.assertEqual(res.status_code, status.HTTP_204_NO_CONTENT)
         self.assertFalse(Recipe.objects.filter(id=recipe.id).exists())
 
-    def test_delete_other_users_recipe_error(self):
+    def test_recipe_other_users_recipe_error(self):
         """Test trying to delete another users recipe gives error"""
         new_user = create_user(email='user2@example.com', password='test123')
         recipe = create_recipe(user=new_user)
@@ -281,7 +281,7 @@ class PrivateRecipeApiTests(TestCase):
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         self.assertEqual(recipe.tags.count(), 0)
 
-    def test_create_recipe_with_new_ingredients(self):
+    def test_create_recipe_with_new_ingredient(self):
         """Test creating a recipe with new ingredients."""
         payload = {
             'title': 'Cauliflower Tacos',
@@ -309,7 +309,7 @@ class PrivateRecipeApiTests(TestCase):
         payload = {
             'title': 'Vietnamese Soup',
             'time_minutes': 25,
-            'price': Decimal('2.55'),
+            'price': '2.55',
             'ingredients': [{'name': 'Lemon'}, {'name': 'Fish Sauce'}],
         }
         res = self.client.post(RECIPES_URL, payload, format='json')
