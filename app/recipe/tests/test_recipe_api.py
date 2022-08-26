@@ -303,7 +303,7 @@ class PrivateRecipeApiTests(TestCase):
             ).exists()
             self.assertTrue(exists)
 
-    def test_create_recipe_with_existing_ingredients(self):
+    def test_create_recipe_with_existing_ingredient(self):
         """Test creating a new recipe with existing ingredient"""
         ingredient = Ingredient.objects.create(user=self.user, name='Lemon')
         payload = {
@@ -331,7 +331,7 @@ class PrivateRecipeApiTests(TestCase):
         """Test creating an ingredient when updating a recipe."""
         recipe = create_recipe(user=self.user)
 
-        payload = {'ingredient': [{'name': 'Limes'}]}
+        payload = {'ingredients': [{'name': 'Limes'}]}
         url = detail_url(recipe.id)
         res = self.client.patch(url, payload, format='json')
 
@@ -342,10 +342,10 @@ class PrivateRecipeApiTests(TestCase):
     def test_update_recipe_assign_ingredient(self):
         """Test assigning an existing ingredient when updating a recipe"""
         ingredient1 = Ingredient.objects.create(user=self.user, name='Pepper')
-        recipe = create+recipe(user=self.user)
+        recipe = create_recipe(user=self.user)
         recipe.ingredients.add(ingredient1)
 
-        ingredient2 = Ingredient.objects.create(self.user, name='Chili')
+        ingredient2 = Ingredient.objects.create(user=self.user, name='Chili')
         payload = {'ingredients': [{'name': 'Chili'}]}
         url = detail_url(recipe.id)
         res = self.client.patch(url, payload, format='json')
@@ -360,7 +360,7 @@ class PrivateRecipeApiTests(TestCase):
         recipe = create_recipe(user=self.user)
         recipe.ingredients.add(ingredient)
 
-        payload = {'ingredient': []}
+        payload = {'ingredients': []}
         url = detail_url(recipe.id)
         res = self.client.patch(url, payload, format='json')
 
