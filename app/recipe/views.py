@@ -55,6 +55,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 class BaseRecipeAttrViewSet(mixins.DestroyModelMixin,
                             mixins.UpdateModelMixin,
                             mixins.ListModelMixin,
@@ -66,6 +67,7 @@ class BaseRecipeAttrViewSet(mixins.DestroyModelMixin,
     def get_queryset(self):
         """Filter queryset to authenticated user."""
         return self.queryset.filter(user=self.request.user).order_by('-name')
+
 
 class TagViewSet(BaseRecipeAttrViewSet):
     """Manage tags in the database"""
